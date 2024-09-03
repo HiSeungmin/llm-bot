@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnH/2/3LYRt3L/mABJObu0iRIebx8aeD9/O7yJ8oR4b8fvLxqT/X3lPqUydIg7IKdiHInzIBQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 600px;
+            height: 80vh;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message.user .message-content {
+            background-color: #d1e7dd;
+            text-align: right;
+        }
+
+        .message.assistant .message-content {
+            background-color: #f8d7da;
+            text-align: left;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #6c757d;
+        }
+
+        .user .icon {
+            background-color: #4CAF50;
+        }
+
+        .assistant .icon {
+            background-color: #FFC107;
+        }
+
+        .message-content {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+            word-wrap: break-word;
+            font-size: 16px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background-color: #ffffff;
+        }
+
+        .input-container input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+
+        .input-container button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box">
+            {% for message in messages %}
+                <div class="message {{ 'user' if message.role == 'user' else 'assistant' }}">
+                    {% if message.role == 'user' %}
+                        <div class="icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    {% else %}
+                        <div class="icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                    {% endif %}
+                    <div class="message-content">
+                        {{ message.content }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form class="input-container" method="POST" action="/">
+            <input type="text" name="user_input" placeholder="채팅을 입력하세요" required>
+            <button type="submit">보내기</button>
+        </form>
+    </div>
+</body>
+</html>

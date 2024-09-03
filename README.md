@@ -13,8 +13,11 @@ LLM chat bot to use CrewAI
     => 로컬에서 작업하는 환경과 호스트 서버에서 작업하는 환경을 일치시켜 주기 위함
     => Docker(Virtual Machine) // venv 모듈을 사용해서 환경 설정을 해주도록 하겠습니다.
 
-- python3.10 -m venv .venv
-.venv/Scripts/activate
+- 가상환경 만들기
+> python3.10 -m venv .venv
+
+- 가상환경 들어가기
+> venv/Scripts/activate
 
 ## 3. 프로젝트
 
@@ -37,9 +40,12 @@ LLM chat bot to use CrewAI
 => 우리 챗봇은 여러분이 만드신 REST API를 기반으로 동작할 거니깐.
 
 > pip install crewai crewai-tools
+> pip install langchain-ollama
+
+> git commit -m "LLM project settings & basic code write"
 
 
 ### 3-1. Ollama 모델 + CrewAI
 
 
-### 3-2. Flask 사용해서 기본적인 챗봏
+### 3-2. Flask 사용해서 기본적인 챗봇
